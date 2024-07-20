@@ -14,7 +14,16 @@
     "noEmit": true,
     "jsx": "react-jsx",
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
+      "@components/*": ["./src/components/*"],
+      "@pages/*": ["./src/pages/*"],
+      "@utils/*": ["./src/utils/*"]
+      // "@client/*": ["client/*"],
+      // "@server/*": ["server/*"],
+      // "@mocks/*": ["mocks/*"],
+      // "@styles/*": ["styles/*"],
+      // "@@types/*": ["types/*"],
+      // "@emotion/core": ["types/empty.d.ts"]
     },
 
     /* Linting */

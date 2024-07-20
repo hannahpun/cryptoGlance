@@ -1,48 +1,16 @@
-import { useAccount, useConnect, useDisconnect } from "wagmi";
-import Assets from "./components/Assets";
+import { Route, Routes } from "react-router-dom";
+import Dashboard from "@pages/Dashboard";
+import TransferAsset from "@pages/TransferAsset";
+import NotFound from "@pages/NotFound";
 
 function App() {
-  const account = useAccount();
-  const { connectors, connect, status, error } = useConnect();
-  const { disconnect } = useDisconnect();
-
   return (
     <>
-      <div>
-        <h2>Account</h2>
-
-        <div>
-          status: {account.status}
-          <br />
-          addresses: {JSON.stringify(account.addresses)}
-          <br />
-          chainId: {account.chainId}
-        </div>
-
-        {account.status === "connected" && (
-          <>
-            <button type="button" onClick={() => disconnect()}>
-              Disconnect
-            </button>
-            <Assets />
-          </>
-        )}
-      </div>
-
-      <div>
-        <h2>Connect</h2>
-        {connectors.map((connector) => (
-          <button
-            key={connector.uid}
-            onClick={() => connect({ connector })}
-            type="button"
-          >
-            {connector.name}
-          </button>
-        ))}
-        <div>{status}</div>
-        <div>{error?.message}</div>
-      </div>
+      <Routes>
+        <Route path="/" element={<Dashboard />} />
+        <Route path="/transfer" element={<TransferAsset />} />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
     </>
   );
 }
