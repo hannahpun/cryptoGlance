@@ -44,7 +44,6 @@ function ConnectWallet() {
                 key={connector.uid}
                 mr="2"
                 onClick={() => connect({ connector })}
-                type="button"
               >
                 {connector.name}
               </Button>

@@ -1,4 +1,4 @@
-import { FormEvent } from "react";
+import { FormEvent, useEffect } from "react";
 import {
   Flex,
   FormControl,
@@ -9,21 +9,13 @@ import {
   Input,
   Button,
 } from "@chakra-ui/react";
-import {
-  useWaitForTransactionReceipt,
-  useSendTransaction,
-  BaseError,
-} from "wagmi";
+
+import { useTransactionContext } from "@utils/TransactionContext";
 import { Link } from "react-router-dom";
 import { Hex, parseEther } from "viem";
 
 function TransferAsset() {
-  const {
-    data: hash,
-    error,
-    isPending,
-    sendTransaction,
-  } = useSendTransaction();
+  const { sendTransaction, isPending } = useTransactionContext();
 
   async function submit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -37,11 +29,6 @@ function TransferAsset() {
     });
   }
 
-  const { isLoading: isConfirming, isSuccess: isConfirmed } =
-    useWaitForTransactionReceipt({
-      hash,
-    });
-
   return (
     <Box m="10">
       <Link to="/">
@@ -50,7 +37,7 @@ function TransferAsset() {
         </Text>
       </Link>
       <Heading size="md" mb="2">
-        Transfer Asset
+        Transaction Asset
       </Heading>
 
       <form onSubmit={submit}>
@@ -73,13 +60,6 @@ function TransferAsset() {
           </Button>
         </Flex>
       </form>
-
-      {hash && <div>Transaction Hash: {hash}</div>}
-      {isConfirming && "Waiting for confirmation..."}
-      {isConfirmed && "Transaction confirmed."}
-      {error && (
-        <div>Error: {(error as BaseError).shortMessage || error.message}</div>
-      )}
     </Box>
   );
 }

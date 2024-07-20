@@ -97,11 +97,13 @@ function Assets() {
           <Text>View your cryptocurrency assets and their current value.</Text>
           <Button
             mt="3"
+            colorScheme="teal"
+            variant="outline"
             onClick={() => {
               navigate("/transfer");
             }}
           >
-            Transfer Asset
+            Transaction Asset
           </Button>
         </CardHeader>
         <CardBody>
