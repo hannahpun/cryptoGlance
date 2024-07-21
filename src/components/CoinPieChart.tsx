@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, memo } from "react";
 import { PieChart } from "react-minimal-pie-chart";
 import {
   Box,
@@ -10,8 +10,26 @@ import {
 } from "@chakra-ui/react";
 
 import { GlobalContext } from "@utils/global-state-management";
-function CoinPieChart({ assetsBalace, totalBalnce }) {
+import { IAssetBalance } from "@/types/asset.type";
+
+function getRandomHexColor() {
+  const letters = "0123456789ABCDEF";
+  let color = "#";
+  for (let i = 0; i < 6; i++) {
+    color += letters[Math.floor(Math.random() * 16)];
+  }
+  return color;
+}
+
+function CoinPieChart({
+  assetsBalace,
+  totalBalnce,
+}: {
+  assetsBalace: Array<IAssetBalance>;
+  totalBalnce: number;
+}) {
   const { assets } = useContext(GlobalContext);
+
   return (
     <Box display="flex" w="30%">
       <Card>
@@ -24,24 +42,11 @@ function CoinPieChart({ assetsBalace, totalBalnce }) {
         </CardHeader>
         <CardBody>
           <PieChart
-            // center={[50, 50]}
-            data={[
-              {
-                color: "#E38627",
-                title: assets[0]?.symbol,
-                value: Math.floor(assetsBalace?.[0]?.value / totalBalnce),
-              },
-              {
-                color: "#C13C37",
-                title: assets[1]?.symbol,
-                value: Math.floor(assetsBalace?.[1]?.value / totalBalnce),
-              },
-              {
-                color: "#6A2135",
-                title: assets[2]?.symbol,
-                value: Math.floor(assetsBalace?.[2]?.value / totalBalnce),
-              },
-            ]}
+            data={assetsBalace.map((asset, i) => ({
+              color: getRandomHexColor(),
+              title: assets[i]?.symbol,
+              value: asset?.value / totalBalnce,
+            }))}
             viewBoxSize={[130, 130]}
           />
         </CardBody>
@@ -49,5 +54,4 @@ function CoinPieChart({ assetsBalace, totalBalnce }) {
     </Box>
   );
 }
-
-export default CoinPieChart;
+export default memo(CoinPieChart);

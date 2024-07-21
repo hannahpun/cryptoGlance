@@ -5,7 +5,6 @@ import {
   Heading,
   Text,
   Button,
-  Box,
   Flex,
 } from "@chakra-ui/react";
 import { useAccount, useConnect, useDisconnect } from "wagmi";
@@ -15,7 +14,7 @@ import SwitchChain from "./SwitchChain";
 
 function ConnectWallet() {
   const account = useAccount();
-  const { connectors, connect, status, error } = useConnect();
+  const { connectors, connect, error } = useConnect();
   const { disconnect } = useDisconnect();
 
   return (

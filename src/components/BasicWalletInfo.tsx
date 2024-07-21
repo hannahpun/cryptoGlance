@@ -1,6 +1,7 @@
+import { memo } from "react";
 import { Text, Box, Heading } from "@chakra-ui/react";
 
-import { useAccount, useBalance, useToken } from "wagmi";
+import { useAccount, useBalance } from "wagmi";
 
 function BasicWalletInfo() {
   const { address, chainId } = useAccount();
@@ -22,4 +23,4 @@ function BasicWalletInfo() {
   );
 }
 
-export default BasicWalletInfo;
+export default memo(BasicWalletInfo);

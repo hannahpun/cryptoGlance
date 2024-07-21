@@ -17,11 +17,18 @@ import {
 } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 import { GlobalContext } from "@utils/global-state-management";
+import { IAssetBalance } from "@/types/asset.type";
 
-function Assets({ assetsBalace, totalBalnce }) {
+function Assets({
+  assetsBalace,
+  totalBalnce,
+}: {
+  assetsBalace: Array<IAssetBalance>;
+  totalBalnce: number;
+}) {
   const { assets } = useContext(GlobalContext);
   const navigate = useNavigate();
-
+  console.log("assets: ", assets);
   return (
     <>
       <Card>
@@ -69,8 +76,9 @@ function Assets({ assetsBalace, totalBalnce }) {
                     <Th>{asset.address}</Th>
                     <Th>{assetsBalace?.[index]?.value}</Th>
                     <Th>
-                      {Math.floor(assetsBalace?.[index]?.value / totalBalnce) *
-                        100}
+                      {Math.floor(
+                        (assetsBalace?.[index]?.value / totalBalnce) * 100
+                      )}
                       %
                     </Th>
                   </Tr>

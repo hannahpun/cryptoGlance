@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { Button, Text, Heading, Box } from "@chakra-ui/react";
 import { useSwitchChain, useChainId } from "wagmi";
 

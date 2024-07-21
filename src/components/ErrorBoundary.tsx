@@ -18,14 +18,14 @@ export class ErrorBoundary extends React.Component<
   }
 
   // if an error happened, set the state to true
-  static getDerivedStateFromError(error: any) {
+  static getDerivedStateFromError() {
     return { hasError: true };
   }
 
   render() {
     // if error happened, return a fallback component
     if (this.state.hasError) {
-      return <>Oh no! Epic fail!</>;
+      return <>Oh no! fail!</>;
     }
 
     return this.props.children;

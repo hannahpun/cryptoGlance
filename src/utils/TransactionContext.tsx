@@ -16,7 +16,6 @@ export const TransactionProvider = ({
     isPending,
     sendTransaction,
   } = useSendTransaction();
-  //   const [toastData, setToastData] = useState(null);
   const { isLoading: isConfirming, isSuccess: isConfirmed } =
     useWaitForTransactionReceipt({
       hash,

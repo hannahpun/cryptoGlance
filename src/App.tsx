@@ -3,7 +3,6 @@ import { Route, Routes } from "react-router-dom";
 import Dashboard from "@pages/Dashboard";
 import TransferAsset from "@pages/TransferAsset";
 import NotFound from "@pages/NotFound";
-// import { ToastProvider } from "@utils/ToastContext";
 import { TransactionProvider } from "@utils/TransactionContext";
 import { GlobalContext, reducer } from "@utils/global-state-management";
 function App() {

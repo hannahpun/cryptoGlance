@@ -1,13 +1,13 @@
 import { createContext, Dispatch, Reducer } from "react";
-import { ITokenContrast } from "@/types/asset.type";
+import { IAssetsDetail } from "@/types/asset.type";
 
 /**
  * Reducer 的動作類型
  */
-export type ReducerActionType = "SET_ASSETS" | "SET_TOAST";
+export type ReducerActionType = "SET_ASSETS";
 
 export type GlobalState = {
-  assets: Array<ITokenContrast> | [];
+  assets: Array<IAssetsDetail> | [];
   dispatch: Dispatch<ReducerAction>;
 };
 
@@ -37,7 +37,10 @@ export const reducer: Reducer<ReducerState, ReducerAction> = (
 ) => {
   switch (action.type) {
     case "SET_ASSETS":
-      state = { ...state, assets: action.payload as Array<Assets> | null };
+      state = {
+        ...state,
+        assets: action.payload as Array<IAssetsDetail> | [],
+      };
       break;
     default:
       throw new Error("Invalid action type");
@@ -49,8 +52,6 @@ export const reducer: Reducer<ReducerState, ReducerAction> = (
  * 建立全域狀態的 Context
  */
 export const GlobalContext = createContext<GlobalState>({
-  // products: [],
-  // orders: [],
   assets: [],
   dispatch: () => null,
 });
