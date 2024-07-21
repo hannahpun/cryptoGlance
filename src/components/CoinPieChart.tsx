@@ -1,3 +1,4 @@
+import { useContext } from "react";
 import { PieChart } from "react-minimal-pie-chart";
 import {
   Box,
@@ -7,7 +8,10 @@ import {
   Heading,
   Text,
 } from "@chakra-ui/react";
-function CoinPieChart() {
+
+import { GlobalContext } from "@utils/global-state-management";
+function CoinPieChart({ assetsBalace, totalBalnce }) {
+  const { assets } = useContext(GlobalContext);
   return (
     <Box display="flex" w="30%">
       <Card>
@@ -24,27 +28,20 @@ function CoinPieChart() {
             data={[
               {
                 color: "#E38627",
-                title: "One 10",
-                value: 10,
+                title: assets[0]?.symbol,
+                value: Math.floor(assetsBalace?.[0]?.value / totalBalnce),
               },
               {
                 color: "#C13C37",
-                title: "Two",
-                value: 15,
+                title: assets[1]?.symbol,
+                value: Math.floor(assetsBalace?.[1]?.value / totalBalnce),
               },
               {
                 color: "#6A2135",
-                title: "Three",
-                value: 20,
+                title: assets[2]?.symbol,
+                value: Math.floor(assetsBalace?.[2]?.value / totalBalnce),
               },
             ]}
-            // labelPosition={50}
-            // lengthAngle={360}
-            // lineWidth={15}
-            // paddingAngle={0}
-            // radius={50}
-            // rounded
-            // startAngle={0}
             viewBoxSize={[130, 130]}
           />
         </CardBody>

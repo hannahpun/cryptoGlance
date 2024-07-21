@@ -22,7 +22,6 @@
       // "@server/*": ["server/*"],
       // "@mocks/*": ["mocks/*"],
       // "@styles/*": ["styles/*"],
-      // "@@types/*": ["types/*"],
       // "@emotion/core": ["types/empty.d.ts"]
     },
 

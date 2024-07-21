@@ -1,12 +1,10 @@
-import { useEffect, useState } from "react";
+import { useContext } from "react";
 import {
   Table,
   Thead,
   Tbody,
   Tr,
   Th,
-  Td,
-  TableCaption,
   TableContainer,
   Card,
   CardHeader,
@@ -17,81 +15,16 @@ import {
   Box,
   Image,
 } from "@chakra-ui/react";
-import { useAccount, useReadContracts } from "wagmi";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { GlobalContext } from "@utils/global-state-management";
 
-import { fetchData } from "@utils/http-management";
-import TokenBalance from "@components/TokenBalance";
-
-interface IAssets {
-  id: string;
-  image: string;
-  symbol: string;
-  current_price: string;
-}
-interface ITokenContrast {
-  id: string;
-  address: string;
-}
-
-interface IReadContracts {
-  address: string;
-  balance: string;
-}
-
-interface IAssetsDetail extends IAssets, ITokenContrast {}
-
-const allowAssetsList = ["bitcoin", "usd-coin", "weth"];
-
-function Assets() {
-  const { address } = useAccount();
-  if (!address) return;
-
+function Assets({ assetsBalace, totalBalnce }) {
+  const { assets } = useContext(GlobalContext);
   const navigate = useNavigate();
-  const [assetsData, setAssetData] = useState<Array<IAssetsDetail>>([]);
-
-  const params = {
-    vs_currency: "usd",
-    ids: allowAssetsList.join(","),
-  };
-
-  const searchParams = new URLSearchParams(params);
-
-  useEffect(() => {
-    // get market price
-    const getFetchData = async () => {
-      const coinMarket = await fetchData({
-        url: `/coins/markets?${searchParams.toString()}`,
-      });
-      const coinDetail = await Promise.all(
-        allowAssetsList.map((asset) =>
-          fetchData({
-            url: `/coins/${asset}`,
-          })
-        )
-      );
-
-      // console.log("data: ", data);
-      const getAssetsDetail: Array<IAssetsDetail> = coinMarket.map(
-        (asset: IAssets, index: number) => ({
-          id: asset.id,
-          image: asset.image,
-          symbol: asset.symbol,
-          current_price: asset.current_price,
-          // address: coinDetail[index]?.platforms?.ethereum || "",
-          address: "0xfFf9976782d46CC05630D1f6eBAb18b2324d6B14" || "",
-        })
-      );
-      setAssetData(getAssetsDetail);
-    };
-    getFetchData();
-  }, []);
 
   return (
     <>
-      {/* {JSON.stringify(assetsData)} */}
       <Card>
-        {/* {balanceData !== undefined && <div>WETH Balance: {uniBalance}</div>} */}
         <CardHeader>
           <Heading size="md">Asset List</Heading>
           <Text>View your cryptocurrency assets and their current value.</Text>
@@ -116,11 +49,10 @@ function Assets() {
                   <Th>Address</Th>
                   <Th>Value</Th>
                   <Th>Percentage</Th>
-                  {/* <Th isNumeric>Value</Th> */}
                 </Tr>
               </Thead>
               <Tbody>
-                {assetsData.map((asset: IAssetsDetail) => (
+                {assets.map((asset: any, index) => (
                   <Tr key={asset.id}>
                     <Th>
                       <Box display="flex" alignItems="center">
@@ -133,10 +65,14 @@ function Assets() {
                         {asset.symbol}
                       </Box>
                     </Th>
-                    <Th>Amount: {<TokenBalance contrast={asset.address} />}</Th>
+                    <Th>{assetsBalace?.[index]?.balance}</Th>
                     <Th>{asset.address}</Th>
-                    <Th>{asset.current_price}</Th>
-                    <Th>Percentage</Th>
+                    <Th>{assetsBalace?.[index]?.value}</Th>
+                    <Th>
+                      {Math.floor(assetsBalace?.[index]?.value / totalBalnce) *
+                        100}
+                      %
+                    </Th>
                   </Tr>
                 ))}
               </Tbody>
