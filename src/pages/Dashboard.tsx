@@ -1,8 +1,8 @@
 import { useAccount } from "wagmi";
 import { Box } from "@chakra-ui/react";
 
-import ConnectWallet from "@components/ConnectWallet";
-import AssetsContainer from "@components/AssetsContainer";
+import ConnectWallet from "@components/ConnectedWallet/ConnectWallet";
+import AssetsContainer from "@/components/Assets/AssetsContainer";
 
 function Dashboard() {
   const { isConnected } = useAccount();

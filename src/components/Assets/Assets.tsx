@@ -54,7 +54,7 @@ function Assets({
                   <Th>Asset</Th>
                   <Th>Amount</Th>
                   <Th>Address</Th>
-                  <Th>Value</Th>
+                  <Th>USD Value</Th>
                   <Th>Percentage</Th>
                 </Tr>
               </Thead>
