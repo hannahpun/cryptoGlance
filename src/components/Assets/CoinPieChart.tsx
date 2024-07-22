@@ -41,14 +41,18 @@ function CoinPieChart({
           </Text>
         </CardHeader>
         <CardBody>
-          <PieChart
-            data={assetsBalace.map((asset, i) => ({
-              color: getRandomHexColor(),
-              title: assets[i]?.symbol,
-              value: asset?.usdValue / totalBalnce,
-            }))}
-            viewBoxSize={[130, 130]}
-          />
+          {totalBalnce > 0 ? (
+            <PieChart
+              data={assetsBalace.map((asset, i) => ({
+                color: getRandomHexColor(),
+                title: assets[i]?.symbol,
+                value: asset?.usdValue / totalBalnce,
+              }))}
+              viewBoxSize={[130, 130]}
+            />
+          ) : (
+            <Text>Do not have data</Text>
+          )}
         </CardBody>
       </Card>
     </Box>

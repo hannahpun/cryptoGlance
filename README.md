@@ -16,6 +16,12 @@ This is the side project for basic Crypto platform, have some features belows
 
 ## How to run
 
+Remenber create env and add coingecko API key inside file like
+
+```
+VITE_COINGECKO_TOKEN='YOUR_KEY'
+```
+
 ```js
 # install dependencies
 npm install
@@ -50,4 +56,4 @@ src
 
 - Context + useRedux: The project is pretty small, only few state need to store, so no need to use complicated global state management like redux
 - Wagmi: Provide simple React Hook to integrate web3, also no need to do too much extra setting
-- Vite: It's faster and easier than webpack
+- Vite: It's faster(Native ESmodule, use rollup to bundle in production environment) and easier than webpack

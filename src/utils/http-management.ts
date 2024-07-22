@@ -1,6 +1,5 @@
 enum URL {
   CoinGecko = "https://api.coingecko.com/api/v3",
-  Etherscan = "https://api.etherscan.io/api",
 }
 /**
  * API 回應的格式
@@ -32,7 +31,7 @@ export const fetchData = async ({
   url,
   params,
 }: {
-  baseUrl?: "CoinGecko" | "Etherscan";
+  baseUrl?: "CoinGecko";
   method?: HTTPMethod;
   url: string;
   params?: unknown;
