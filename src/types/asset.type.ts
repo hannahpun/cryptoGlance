@@ -17,5 +17,5 @@ export interface IAssetsDetail extends IAssets, ITokenContrast {}
 
 export interface IAssetBalance {
   balance: string;
-  value: number;
+  usdValue: number;
 }

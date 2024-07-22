@@ -9,12 +9,10 @@ import CoinPieChart from "@/components/Assets/CoinPieChart";
 import { GlobalContext } from "@utils/global-state-management";
 import { fetchData } from "@utils/http-management";
 
+import { useTransactionContext } from "@utils/TransactionContext";
 import { IAssetBalance } from "@/types/asset.type";
 
 const allowAssetsList = ["wrapped-bitcoin", "usd-coin", "weth"];
-const wagmiContract = {
-  abi: erc20Abi,
-} as const;
 
 function AssetsContainer() {
   const { address } = useAccount();
@@ -22,6 +20,8 @@ function AssetsContainer() {
 
   const [assetsBalace, setAssetBalace] = useState<Array<IAssetBalance>>([]);
   const [totalBalnce, setTotalBalnce] = useState(0);
+
+  const { isConfirming } = useTransactionContext();
 
   useEffect(() => {
     // Fetch reelated API and get the data then set it to the global state
@@ -60,7 +60,7 @@ function AssetsContainer() {
   const { data: balanceData, isSuccess: balanceDataSuccess } = useReadContracts(
     {
       contracts: assets?.map((asset) => ({
-        ...wagmiContract,
+        abi: erc20Abi,
         address: asset?.address,
         functionName: "balanceOf",
         args: [address],
@@ -71,7 +71,7 @@ function AssetsContainer() {
   const { data: decimalsData, isSuccess: decimalsDataSuccess } =
     useReadContracts({
       contracts: assets?.map((asset) => ({
-        ...wagmiContract,
+        abi: erc20Abi,
         address: asset?.address,
         functionName: "decimals",
       })),
@@ -85,17 +85,18 @@ function AssetsContainer() {
       );
       return {
         balance: formatBalance,
-        value: Number(formatBalance) * Number(assets?.[index]?.current_price),
+        usdValue:
+          Number(formatBalance) * Number(assets?.[index]?.current_price),
       };
     });
     setAssetBalace(getAssetsBalance);
 
-    const totalAge = getAssetsBalance.reduce((acc, cur) => {
-      return acc + cur.value;
+    const getTotalBalance = getAssetsBalance.reduce((acc, cur) => {
+      return acc + cur.usdValue;
     }, 0);
 
-    setTotalBalnce(totalAge);
-  }, [balanceDataSuccess, decimalsDataSuccess]);
+    setTotalBalnce(getTotalBalance);
+  }, [balanceDataSuccess, decimalsDataSuccess, isConfirming]);
 
   return (
     <>

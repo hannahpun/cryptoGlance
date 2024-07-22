@@ -52,7 +52,9 @@ export const TransactionProvider = ({
   }, [isConfirmed, isPending, error]);
 
   return (
-    <TransactionContext.Provider value={{ sendTransaction, isPending }}>
+    <TransactionContext.Provider
+      value={{ sendTransaction, isPending, isConfirming }}
+    >
       {children}
     </TransactionContext.Provider>
   );

@@ -45,3 +45,9 @@ src
 - Web3 Integration: Wagmi
 - UI Component: Chakra UI
 - Build Tools: Vite
+
+## Why Use
+
+- Context + useRedux: The project is pretty small, only few state need to store, so no need to use complicated global state management like redux
+- Wagmi: Provide simple React Hook to integrate web3, also no need to do too much extra setting
+- Vite: It's faster and easier than webpack

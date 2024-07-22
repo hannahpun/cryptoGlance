@@ -1,4 +1,4 @@
-import { useContext, memo } from "react";
+import { useContext } from "react";
 import { PieChart } from "react-minimal-pie-chart";
 import {
   Box,
@@ -45,7 +45,7 @@ function CoinPieChart({
             data={assetsBalace.map((asset, i) => ({
               color: getRandomHexColor(),
               title: assets[i]?.symbol,
-              value: asset?.value / totalBalnce,
+              value: asset?.usdValue / totalBalnce,
             }))}
             viewBoxSize={[130, 130]}
           />
@@ -54,4 +54,4 @@ function CoinPieChart({
     </Box>
   );
 }
-export default memo(CoinPieChart);
+export default CoinPieChart;

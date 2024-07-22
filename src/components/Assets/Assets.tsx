@@ -28,7 +28,6 @@ function Assets({
 }) {
   const { assets } = useContext(GlobalContext);
   const navigate = useNavigate();
-  console.log("assets: ", assets);
   return (
     <>
       <Card>
@@ -74,10 +73,10 @@ function Assets({
                     </Th>
                     <Th>{assetsBalace?.[index]?.balance}</Th>
                     <Th>{asset.address}</Th>
-                    <Th>{assetsBalace?.[index]?.value}</Th>
+                    <Th>{assetsBalace?.[index]?.usdValue}</Th>
                     <Th>
                       {Math.floor(
-                        (assetsBalace?.[index]?.value / totalBalnce) * 100
+                        (assetsBalace?.[index]?.usdValue / totalBalnce) * 100
                       )}
                       %
                     </Th>
