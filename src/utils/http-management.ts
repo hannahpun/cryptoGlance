@@ -1,6 +1,6 @@
-enum URL {
-  CoinGecko = "https://api.coingecko.com/api/v3",
-}
+const URL = {
+  CoinGecko: "https://api.coingecko.com/api/v3",
+};
 /**
  * API 回應的格式
  */

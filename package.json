@@ -6,8 +6,8 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "lint": "biome check .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "lint": "eslint ."
   },
   "dependencies": {
     "@chakra-ui/react": "^2.8.2",
@@ -22,16 +22,22 @@
   },
   "devDependencies": {
     "@biomejs/biome": "^1.8.0",
+    "@eslint/js": "^9.7.0",
     "@testing-library/dom": "^10.3.2",
     "@testing-library/react": "^16.0.0",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
+    "@typescript-eslint/parser": "^7.16.1",
     "@vitejs/plugin-react": "^4.2.1",
     "@wagmi/cli": "latest",
     "buffer": "^6.0.3",
+    "eslint": "^8.57.0",
+    "eslint-plugin-react": "^7.35.0",
+    "globals": "^15.8.0",
     "react-minimal-pie-chart": "^8.4.0",
     "react-router-dom": "^6.25.1",
     "typescript": "^5.4.5",
+    "typescript-eslint": "^7.16.1",
     "vite": "^5.2.11",
     "vite-tsconfig-paths": "^4.3.2"
   }

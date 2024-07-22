@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect } from "react";
+import React, { createContext, useContext, useEffect } from "react";
 import { useToast } from "@chakra-ui/react";
 import { useWaitForTransactionReceipt, useSendTransaction } from "wagmi";
 
