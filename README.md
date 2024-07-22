@@ -19,6 +19,7 @@ This is the side project for basic Crypto platform, have some features belows
 Remenber create env and add coingecko API key inside file like
 
 ```
+// .env
 VITE_COINGECKO_TOKEN='YOUR_KEY'
 ```
 
