@@ -73,7 +73,9 @@ function Assets({
                     </Th>
                     <Th>{assetsBalace?.[index]?.balance}</Th>
                     <Th>{asset.address}</Th>
-                    <Th>{assetsBalace?.[index]?.usdValue}</Th>
+                    <Th data-testid="usdValue">
+                      {assetsBalace?.[index]?.usdValue}
+                    </Th>
                     <Th>
                       {Math.floor(
                         (assetsBalace?.[index]?.usdValue / totalBalnce) * 100
